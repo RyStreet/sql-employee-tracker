@@ -92,7 +92,7 @@ const addDepartment = () => {
   .then(answers =>{
     const newDeptName = answers.deptName;
     const newDeptId = answers.deptId;
-    db.query(`INSERT into departments (id, department_name) VALUES (${newDeptId}, "${newDeptName}" )`, function (err, results){
+    db.query(`INSERT into departments (id, department_name) VALUES (?, ?)`, newDeptId, newDeptName, (err, results) => {
       if (err){
         throw err
       }
@@ -100,7 +100,7 @@ const addDepartment = () => {
       return viewAllDepartments();
     })
   })
-}
+};
 
 viewAllRoles = () =>{
   db.query("SELECT * FROM roles", function (err, results){
@@ -126,6 +126,8 @@ viewAllRoles = () =>{
 })};
 
 addRole = ()=>{
+  //query to get dept list and insert into array for choices
+
  return inquirer 
 .prompt ([{
   type: 'input',
@@ -143,6 +145,7 @@ type: 'input',
 name: 'salary',
 message: "Enter Salary",
 },
+
 {
   type: 'input',
   name: 'deptId',
