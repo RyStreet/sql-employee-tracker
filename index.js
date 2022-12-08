@@ -253,3 +253,61 @@ return viewAllEmployees();
 })
 })
 };
+
+updateEmployee = () =>{
+   db.query(`SELECT employees.id, employees.first_name, employees.last_name FROM employees`, (err, results) => {
+    if(err){
+      throw err
+    }
+    console.table(results)
+    getEmployeeID();
+  })
+};
+
+const getEmployeeID =  () => {
+
+  return inquirer
+  .prompt([
+  {
+    type: "input",
+    name: 'employeeId',
+    message: 'What is the Employee ID?'
+  }
+])
+.then(answers =>{
+  const selectedId = answers.employeeId;
+  console.log(selectedId)
+
+  db.query(`SELECT roles.id, roles.title FROM roles`, (err, results) => {
+    if(err){
+      throw err
+    }
+    console.table(results)});
+  
+
+return inquirer
+.prompt([
+  {
+  type: 'input',
+  name: 'newRole',
+  message: "Enter new role ID for your employee"
+}
+])
+.then(answers =>{
+  const selectedRole = answers.newRole
+  console.log(selectedRole, selectedId)
+
+ db.query(`UPDATE employees SET role_id = ? WHERE employees.id = ?`,  [selectedRole, selectedId], (err, res) =>{
+  if(err){ throw err
+  }
+  // console.table(res)
+  console.log('Employee role updated')
+  viewAllEmployees();
+ })
+}
+)
+
+
+
+
+})}
