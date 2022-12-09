@@ -1,20 +1,9 @@
 //dependencies
-const mysql = require('mysql2');
+// const mysql = require('mysql2');
+
 const inquirer = require('inquirer');
 const cTable = require('console.table');
-
-//Connect to database
-const db = mysql.createConnection(
-    {
-      host: 'localhost',
-      // MySQL username,
-      user: 'root',
-      // TODO: Add MySQL password
-      password: '6C6iuV82HIl9',
-      database: 'company_db'
-    },
-    console.log(`Connected to the company_db database.`)
-  );
+const db = require('./config/connection')
 
 db.connect(function(err) {
     if (err) throw err
@@ -132,10 +121,14 @@ viewAllRoles = () =>{
 })};
 
 addRole = ()=>{
-  //query to get dept list and insert into array for choices
-
+  // db.query('SELECT * FROM departments', function (err, results){
+  //   if(err) throw err;
+  //   console.table(results)})
  return inquirer 
-.prompt ([{
+.prompt ([
+
+
+  {
   type: 'input',
   name: 'roleName',
   message: 'Enter Role Name',
@@ -155,8 +148,9 @@ message: "Enter Salary",
 {
   type: 'input',
   name: 'deptId',
-  message: "Enter Department ID",  
+  message: "Enter Department ID for Role",  
 },
+
 
 ])
 .then(answers =>{
@@ -310,4 +304,4 @@ return inquirer
 
 
 
-})}
+})};
