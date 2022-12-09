@@ -13,6 +13,7 @@ ___
 ___
   ## Description 
   This project uses the mysql and inquirer to manage an employee database in the CLI. Users can add departments, roles, employees and view the data within their tables.
+  Demo video link: https://github.com/RyStreet/sql-employee-tracker/blob/main/sql%20employee%20tracker.webm
 ___
   ## Installation 
   Clone a copy of this code, install dependencies then enter the command `node index` in the terminal to prompt the application.
